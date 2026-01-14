@@ -156,10 +156,14 @@
 @layer components {
   /* 3D Glass Card System */
   .glass-card {
-    @apply relative bg-card/60 backdrop-blur-xl border border-border/40 rounded-xl;
+    /* Mobile: Solid (High Performance) */
+    @apply relative bg-card border border-border/40 rounded-xl;
+    /* Desktop: Blur (High Quality) */
+    @apply md:bg-card/60 md:backdrop-blur-xl;
+    
     box-shadow: var(--shadow-cyber);
     transform: translateZ(0);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .glass-card:hover {
@@ -168,12 +172,20 @@
   }
 
   .glass-panel {
-    @apply bg-card/40 backdrop-blur-2xl border border-border/20 rounded-2xl;
+    /* Mobile: Solid */
+    @apply bg-card border border-border/20 rounded-2xl;
+    /* Desktop: Blur */
+    @apply md:bg-card/40 md:backdrop-blur-2xl;
+    
     box-shadow: var(--shadow-3d);
   }
 
   .glass-button {
-    @apply bg-card/30 backdrop-blur-lg border border-border/30 hover:bg-card/50 transition-all duration-300;
+    /* Mobile: Solid */
+    @apply bg-card/90 border border-border/30 hover:bg-card/95 transition-colors duration-300;
+    /* Desktop: Blur */
+    @apply md:bg-card/30 md:backdrop-blur-lg md:hover:bg-card/50;
+    
     box-shadow: var(--glow-primary);
   }
 
@@ -185,7 +197,7 @@
     border: 1px solid hsl(var(--border) / 0.5);
     transform-style: preserve-3d;
     perspective: 1000px;
-    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.5s cubic-bezier(0.23, 1, 0.32, 1);
   }
 
   .cyber-card::before {
@@ -334,7 +346,7 @@
   }
 
   .nav-link {
-    @apply relative px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-all duration-300;
+    @apply relative px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors duration-300;
   }
 
   .nav-link::after {
@@ -355,7 +367,7 @@
   .btn-3d {
     @apply relative overflow-hidden;
     transform-style: preserve-3d;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .btn-3d::before {

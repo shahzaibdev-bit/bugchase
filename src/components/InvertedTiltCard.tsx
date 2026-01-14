@@ -18,6 +18,9 @@ export const InvertedTiltCard = ({
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!wrapperRef.current) return;
 
+    // PERFORMANCE OPTIMIZATION: Disable on mobile/touch devices
+    if (typeof window !== 'undefined' && window.innerWidth < 768) return;
+
     const rect = wrapperRef.current.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;

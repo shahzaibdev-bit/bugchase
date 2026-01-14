@@ -141,14 +141,17 @@ const CardNav = ({
         <div className="card-nav-top relative h-[40px] flex items-center justify-between px-2 z-50"> 
           {/* Hamburger (Mobile) */}
           <div
-            className={`hamburger-menu ${isHamburgerOpen ? 'open' : ''} group h-full flex flex-col items-center justify-center cursor-pointer gap-[6px] order-2 md:hidden`}
-            onClick={isExpanded ? closeMenu : openMenu}
+            className={`hamburger-menu ${isHamburgerOpen ? 'open' : ''} group h-full w-8 shrink-0 ml-auto flex flex-col items-center justify-center cursor-pointer gap-[6px] order-2 md:hidden z-50 pointer-events-auto`}
+            onClick={(e) => {
+                 e.stopPropagation();
+                 isExpanded ? closeMenu() : openMenu();
+            }}
             role="button"
             tabIndex={0}
             style={{ color: menuColor || '#000' }}
           >
-            <div className={`hamburger-line w-[30px] h-[2px] bg-current transition-all duration-300 ${isHamburgerOpen ? 'translate-y-[4px] rotate-45' : ''}`} />
-            <div className={`hamburger-line w-[30px] h-[2px] bg-current transition-all duration-300 ${isHamburgerOpen ? '-translate-y-[4px] -rotate-45' : ''}`} />
+            <div className={`hamburger-line w-6 h-0.5 bg-current rounded-full transition-all duration-300 ${isHamburgerOpen ? 'translate-y-[5px] rotate-45' : ''}`} />
+            <div className={`hamburger-line w-6 h-0.5 bg-current rounded-full transition-all duration-300 ${isHamburgerOpen ? '-translate-y-[5px] -rotate-45' : ''}`} />
           </div>
 
           {/* Desktop Triggers */}

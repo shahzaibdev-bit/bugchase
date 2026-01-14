@@ -101,8 +101,8 @@ export default function AdminLogs() {
       </GlassCard>
 
       {/* Terminal-style Logs */}
-      <GlassCard className="p-0 overflow-hidden">
-        <div className="flex items-center gap-2 px-4 py-3 bg-foreground/5 border-b border-border/30">
+      <GlassCard className="p-0 overflow-hidden overflow-x-auto">
+        <div className="flex items-center gap-2 px-4 py-3 bg-foreground/5 border-b border-border/30 min-w-[600px]">
           <Terminal className="h-4 w-4 text-primary" />
           <span className="font-mono text-sm text-foreground">Activity Log Stream</span>
           <div className="ml-auto flex items-center gap-2">
@@ -111,7 +111,7 @@ export default function AdminLogs() {
           </div>
         </div>
 
-        <div className="divide-y divide-border/20 max-h-[600px] overflow-y-auto">
+        <div className="divide-y divide-border/20 max-h-[600px] overflow-y-auto min-w-[600px]">
           {filteredLogs.map((log) => (
             <div key={log.id} className="p-4 hover:bg-foreground/5 transition-colors font-mono text-sm">
               <div className="flex items-start gap-4">

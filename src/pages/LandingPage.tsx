@@ -86,28 +86,30 @@ export default function LandingPage() {
     <div className="min-h-screen text-foreground overflow-x-hidden">
       
       {/* Hero Section */}
-      <section className="relative z-10 pt-14 pb-20 md:pt-20 md:pb-32 container mx-auto px-4">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <div className="relative z-10 text-left">
+      <section className="relative z-10 min-h-[100dvh] md:min-h-0 flex flex-col justify-center pt-20 pb-10 md:pt-20 md:pb-32 container mx-auto px-4">
+        <div className="grid lg:grid-cols-2 gap-12 items-center flex-1">
+          <div className="relative z-10 text-center lg:text-left flex flex-col justify-center h-full">
              <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <Badge variant="outline" className="mb-6 px-4 py-1.5 border border-black/15 dark:border-white/20 text-zinc-900 dark:text-white bg-zinc-100 dark:bg-white/5 backdrop-blur-md">
-                <span className="w-2 h-2 rounded-full bg-zinc-900 dark:bg-white mr-2 animate-pulse" />
-                NATIONAL SECURITY INFRASTRUCTURE
-              </Badge>
+              <div className="flex justify-center lg:justify-start">
+                  <Badge variant="outline" className="mb-6 px-4 py-1.5 border border-black/15 dark:border-white/20 text-zinc-900 dark:text-white bg-zinc-100 dark:bg-white/5 backdrop-blur-md">
+                    <span className="w-2 h-2 rounded-full bg-zinc-900 dark:bg-white mr-2 animate-pulse" />
+                    NATIONAL SECURITY INFRASTRUCTURE
+                  </Badge>
+              </div>
               <div className="group relative inline-block cursor-default transition-transform duration-500 hover:scale-105">
                 
                 {/* Layer 1: Base Color-Flipping Text */}
-                <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[0.9] mb-6 relative z-10 text-zinc-900 dark:text-transparent">
+                <h1 className="font-display text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[0.9] mb-6 relative z-10 text-zinc-900 dark:text-transparent whitespace-nowrap">
                   {/* BUG: Solid Black (Light) -> White/Gray Gradient (Dark) */}
-                  <span className="inline-block bg-none dark:bg-[linear-gradient(90deg,#ffffff_50%,#a3a3a3_50%)] bg-[length:200%_100%] bg-left group-hover:bg-right transition-[background-position] duration-500 ease-linear bg-clip-text text-zinc-900 dark:text-transparent mr-4">
+                  <span className="inline-block bg-none dark:bg-[linear-gradient(90deg,#ffffff_50%,#a3a3a3_50%)] bg-[length:200%_100%] bg-left group-hover:bg-right transition-[background-position] duration-500 ease-linear bg-clip-text text-zinc-900 dark:text-transparent mr-2 md:mr-4">
                     BUG
                   </span>
                    {/* CHASE.: Solid Gray (Light) -> Gray/White Gradient (Dark) */}
-                  <span className="inline-block italic bg-none dark:bg-[linear-gradient(90deg,#a3a3a3_50%,#ffffff_50%)] bg-[length:200%_100%] bg-left group-hover:bg-right transition-[background-position] duration-500 ease-linear bg-clip-text text-zinc-500 dark:text-transparent">
+                   <span className="inline-block italic bg-none dark:bg-[linear-gradient(90deg,#a3a3a3_50%,#ffffff_50%)] bg-[length:200%_100%] bg-left group-hover:bg-right transition-[background-position] duration-500 ease-linear bg-clip-text text-zinc-500 dark:text-transparent">
                     CHASE.
                   </span>
                 </h1>
@@ -118,12 +120,12 @@ export default function LandingPage() {
                   className="absolute inset-0 z-20 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                   aria-hidden="true"
                 >
-                   <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[0.9] mb-6">
+                   <h1 className="font-display text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[0.9] mb-6 whitespace-nowrap">
                     <ShinyText 
                       text="BUG" 
                       disabled={false} 
                       speed={3} 
-                      className="inline-block mr-4" 
+                      className="inline-block mr-2 md:mr-4" 
                       color="transparent" 
                       shineColor="#ffffff" 
                       spread={120}
@@ -147,18 +149,21 @@ export default function LandingPage() {
                 </div>
               </div>
 
-              <p className="text-zinc-600 dark:text-white/60 text-xs md:text-sm font-mono mb-8 max-w-xl leading-relaxed">
+              <p className="text-zinc-600 dark:text-white/60 text-sm md:text-sm font-mono mb-12 max-w-xl mx-auto lg:mx-0 leading-relaxed px-4 md:px-0">
                 Mobilizing elite cyber-intelligence for sovereign defense. We architect the shield against asymmetric digital threats.
               </p>
-              <div className="flex flex-col sm:flex-row items-center justify-start gap-4">
-                <MagneticButton strength={0.2} triggerRadius={100}>
-                  <Button size="lg" className="h-14 px-8 text-lg bg-zinc-900 text-white hover:bg-zinc-800 dark:bg-white dark:text-black dark:hover:bg-white/90 rounded-xl border border-transparent shadow-[0_0_20px_rgba(0,0,0,0.1)] dark:shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-xl dark:hover:shadow-[0_0_40px_rgba(255,255,255,0.3)] transition-all duration-300 group font-bold">
-                    GET STARTED <ChevronRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+              
+              <div className="flex flex-row flex-nowrap items-center justify-center lg:justify-start gap-3 md:gap-4 w-full md:w-auto">
+                {/* GET STARTED - ORIGINAL STYLING (Side-by-Side) - INCREASED SIZE */}
+                <MagneticButton strength={0.2} triggerRadius={100} className="block">
+                  <Button className="h-12 md:h-14 px-6 md:px-8 text-xs md:text-lg bg-zinc-900 text-white hover:bg-zinc-800 dark:bg-white dark:text-black dark:hover:bg-white/90 rounded-xl border border-transparent shadow-[0_0_20px_rgba(0,0,0,0.1)] dark:shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-xl dark:hover:shadow-[0_0_40px_rgba(255,255,255,0.3)] transition-all duration-300 group font-bold whitespace-nowrap">
+                    GET STARTED <ChevronRight className="ml-1 md:ml-2 h-3 w-3 md:h-5 md:w-5 group-hover:translate-x-1 transition-transform" />
                   </Button>
                 </MagneticButton>
                 
-                <MagneticButton strength={0.2} triggerRadius={100}>
-                  <Button size="lg" variant="outline" className="h-14 px-8 text-lg rounded-xl border border-black/15 dark:border-white/20 hover:bg-zinc-900 dark:hover:bg-white dark:hover:border-white text-zinc-600 dark:text-muted-foreground hover:text-white dark:hover:text-black transition-all duration-300 font-mono">
+                {/* RESEARCHER ACCESS - ORIGINAL STYLING (Side-by-Side) - INCREASED SIZE */}
+                <MagneticButton strength={0.2} triggerRadius={100} className="block">
+                  <Button variant="outline" className="h-12 md:h-14 px-6 md:px-8 text-xs md:text-lg rounded-xl border border-black/15 dark:border-white/20 hover:bg-zinc-900 dark:hover:bg-white dark:hover:border-white text-zinc-600 dark:text-muted-foreground hover:text-white dark:hover:text-black transition-all duration-300 font-mono uppercase whitespace-nowrap">
                     &gt;_ RESEARCHER ACCESS
                   </Button>
                 </MagneticButton>
@@ -193,6 +198,7 @@ export default function LandingPage() {
             </motion.div>
           </div>
         </div>
+        
       </section>
 
       {/* Stats Section with Infinite Ticker */}

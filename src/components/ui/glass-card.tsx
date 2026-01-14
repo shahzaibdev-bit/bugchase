@@ -15,10 +15,10 @@ export function GlassCard({
   ...props 
 }: GlassCardProps & { action?: React.ReactNode }) {
   const variants = {
-    default: 'bg-card/60 backdrop-blur-xl border border-border/30',
-    subtle: 'bg-card/40 backdrop-blur-lg border border-border/20',
-    prominent: 'bg-card/80 backdrop-blur-2xl border border-primary/20 shadow-xl',
-    glow: 'bg-card/60 backdrop-blur-xl border border-primary/30 shadow-lg shadow-primary/10',
+    default: 'bg-card/60 backdrop-blur-md md:backdrop-blur-xl border border-border/30',
+    subtle: 'bg-card/40 backdrop-blur-sm md:backdrop-blur-lg border border-border/20',
+    prominent: 'bg-card/80 backdrop-blur-lg md:backdrop-blur-2xl border border-primary/20 shadow-xl',
+    glow: 'bg-card/60 backdrop-blur-md md:backdrop-blur-xl border border-primary/30 shadow-lg shadow-primary/10',
   };
 
   const paddings = {

@@ -67,17 +67,19 @@ export default function AdminUsers() {
 
       {/* Stats with InvertedTiltCard and InverseSpotlightCard */}
       {/* Stats with Cyberpunk styling */}
+      {/* Stats with InvertedTiltCard and InverseSpotlightCard */}
+      {/* Stats with Cyberpunk styling */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
         <InvertedTiltCard>
-          <InverseSpotlightCard className="bg-zinc-900/50 border border-zinc-800 rounded-xl p-6 flex flex-col items-center justify-center backdrop-blur-sm hover:border-zinc-500 transition-colors">
-            <span className="text-4xl font-bold text-white tracking-tight mb-2">{mockUsers.length}</span>
+          <InverseSpotlightCard className="bg-white/50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 rounded-xl p-6 flex flex-col items-center justify-center backdrop-blur-sm hover:border-zinc-300 dark:hover:border-zinc-500 transition-colors">
+            <span className="text-4xl font-bold text-zinc-900 dark:text-white tracking-tight mb-2">{mockUsers.length}</span>
             <span className="text-[10px] font-mono uppercase tracking-widest text-zinc-500">Total Users</span>
           </InverseSpotlightCard>
         </InvertedTiltCard>
 
         <InvertedTiltCard>
-          <InverseSpotlightCard className="bg-zinc-900/50 border border-zinc-800 rounded-xl p-6 flex flex-col items-center justify-center backdrop-blur-sm hover:border-zinc-500 transition-colors">
-            <span className="text-4xl font-bold text-white tracking-tight mb-2">
+          <InverseSpotlightCard className="bg-white/50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 rounded-xl p-6 flex flex-col items-center justify-center backdrop-blur-sm hover:border-zinc-300 dark:hover:border-zinc-500 transition-colors">
+            <span className="text-4xl font-bold text-zinc-900 dark:text-white tracking-tight mb-2">
               {mockUsers.filter(u => u.role === 'researcher').length}
             </span>
             <span className="text-[10px] font-mono uppercase tracking-widest text-zinc-500">Researchers</span>
@@ -85,8 +87,8 @@ export default function AdminUsers() {
         </InvertedTiltCard>
 
         <InvertedTiltCard>
-          <InverseSpotlightCard className="bg-zinc-900/50 border border-zinc-800 rounded-xl p-6 flex flex-col items-center justify-center backdrop-blur-sm hover:border-zinc-500 transition-colors">
-            <span className="text-4xl font-bold text-white tracking-tight mb-2">
+          <InverseSpotlightCard className="bg-white/50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 rounded-xl p-6 flex flex-col items-center justify-center backdrop-blur-sm hover:border-zinc-300 dark:hover:border-zinc-500 transition-colors">
+            <span className="text-4xl font-bold text-zinc-900 dark:text-white tracking-tight mb-2">
               {mockUsers.filter(u => u.role === 'company').length}
             </span>
             <span className="text-[10px] font-mono uppercase tracking-widest text-zinc-500">Companies</span>
@@ -94,8 +96,8 @@ export default function AdminUsers() {
         </InvertedTiltCard>
 
         <InvertedTiltCard>
-          <InverseSpotlightCard className="bg-zinc-900/50 border border-zinc-800 rounded-xl p-6 flex flex-col items-center justify-center backdrop-blur-sm hover:border-zinc-500 transition-colors">
-            <span className="text-4xl font-bold text-white tracking-tight mb-2">
+          <InverseSpotlightCard className="bg-white/50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 rounded-xl p-6 flex flex-col items-center justify-center backdrop-blur-sm hover:border-zinc-300 dark:hover:border-zinc-500 transition-colors">
+            <span className="text-4xl font-bold text-zinc-900 dark:text-white tracking-tight mb-2">
               {mockUsers.filter(u => u.role === 'triager').length}
             </span>
             <span className="text-[10px] font-mono uppercase tracking-widest text-zinc-500">Triagers</span>
@@ -140,94 +142,190 @@ export default function AdminUsers() {
 
       {/* Users Table */}
       <GlassCard className="p-0 overflow-hidden border-border bg-card/50">
-        <div className="overflow-x-auto">
-          <table className="w-full text-left text-sm">
-            <thead className="bg-muted/50 font-mono text-xs uppercase text-muted-foreground">
-              <tr className="border-b border-border/30">
-                <th className="px-6 py-3 font-medium">User</th>
-                <th className="px-6 py-3 font-medium">Role</th>
-                <th className="px-6 py-3 font-medium">Status</th>
-                <th className="px-6 py-3 font-medium">Activity</th>
-                <th className="px-6 py-3 font-medium">Joined</th>
-                <th className="px-6 py-3 font-medium">Actions</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-border/20">
-              {filteredUsers.map((user) => (
-                <tr key={user.id} className="hover:bg-muted/50 transition-colors">
-                  <td className="px-6 py-4">
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-lg bg-foreground/5 border border-border flex items-center justify-center">
-                        {user.role === 'company' ? (
-                          <Shield className="h-5 w-5 text-muted-foreground" />
-                        ) : (
-                          <User className="h-5 w-5 text-muted-foreground" />
-                        )}
-                      </div>
-                      <div>
-                        <p className="font-medium text-foreground font-mono">{user.name}</p>
-                        <p className="text-sm text-muted-foreground font-mono text-xs">{user.email}</p>
-                      </div>
+        <div className="w-full">
+            {/* Mobile Card View */}
+            <div className="md:hidden space-y-4 p-4 bg-zinc-50/50 dark:bg-zinc-900/20">
+                {filteredUsers.map((user) => (
+                    <div key={user.id} className="bg-background border border-border p-4 rounded-xl shadow-sm flex flex-col gap-4">
+                         {/* Header: User & Action */}
+                         <div className="flex justify-between items-start">
+                           <div className="flex items-center gap-3">
+                             <div className="w-10 h-10 rounded-lg bg-foreground/5 border border-border flex items-center justify-center">
+                               {user.role === 'company' ? (
+                                 <Shield className="h-5 w-5 text-muted-foreground" />
+                               ) : (
+                                 <User className="h-5 w-5 text-muted-foreground" />
+                               )}
+                             </div>
+                             <div>
+                               <p className="font-bold text-foreground font-mono text-sm">{user.name}</p>
+                               <p className="text-xs text-muted-foreground font-mono">{user.email}</p>
+                             </div>
+                           </div>
+                           
+                           <DropdownMenu>
+                              <DropdownMenuTrigger asChild>
+                                <Button variant="ghost" size="icon" className="h-8 w-8 hover:bg-foreground/5 -mr-2">
+                                  <MoreVertical className="h-4 w-4 text-muted-foreground" />
+                                </Button>
+                              </DropdownMenuTrigger>
+                              <DropdownMenuContent align="end" className="bg-background border-border">
+                                <DropdownMenuItem className="focus:bg-muted font-mono text-xs">
+                                  <Mail className="h-3 w-3 mr-2" />
+                                  SEND_EMAIL
+                                </DropdownMenuItem>
+                                <DropdownMenuItem className="focus:bg-muted font-mono text-xs">
+                                  <User className="h-3 w-3 mr-2" />
+                                  VIEW_PROFILE
+                                </DropdownMenuItem>
+                                <DropdownMenuSeparator className="bg-border" />
+                                {user.status === 'active' && (
+                                  <DropdownMenuItem className="text-muted-foreground focus:bg-muted focus:text-foreground font-mono text-xs">
+                                    <AlertTriangle className="h-3 w-3 mr-2" />
+                                    SUSPEND_USER
+                                  </DropdownMenuItem>
+                                )}
+                                {user.status !== 'banned' && (
+                                  <DropdownMenuItem className="text-foreground focus:bg-destructive/10 focus:text-destructive font-mono text-xs">
+                                    <Ban className="h-3 w-3 mr-2" />
+                                    BAN_USER
+                                  </DropdownMenuItem>
+                                )}
+                                {(user.status === 'suspended' || user.status === 'banned') && (
+                                  <DropdownMenuItem className="text-foreground focus:bg-muted font-mono text-xs">
+                                    <CheckCircle className="h-3 w-3 mr-2" />
+                                    RESTORE_USER
+                                  </DropdownMenuItem>
+                                )}
+                              </DropdownMenuContent>
+                            </DropdownMenu>
+                         </div>
+
+                         {/* Details Grid */}
+                         <div className="grid grid-cols-2 gap-3 pt-3 border-t border-border/30">
+                            <div className="space-y-1">
+                              <span className="text-[10px] uppercase tracking-widest text-muted-foreground font-mono">Role</span>
+                              <div>
+                                <Badge variant="outline" className={`font-mono text-xs uppercase ${roleColors[user.role]}`}>
+                                  {user.role}
+                                </Badge>
+                              </div>
+                            </div>
+                            <div className="space-y-1">
+                              <span className="text-[10px] uppercase tracking-widest text-muted-foreground font-mono">Status</span>
+                              <div>
+                                <Badge variant="secondary" className={`font-mono text-xs uppercase ${statusColors[user.status]}`}>
+                                  {user.status}
+                                </Badge>
+                              </div>
+                            </div>
+                            <div className="space-y-1">
+                              <span className="text-[10px] uppercase tracking-widest text-muted-foreground font-mono">Activity</span>
+                              <p className="font-mono text-sm text-foreground">
+                                {user.role === 'researcher' && `${user.reports} reports`}
+                                {user.role === 'company' && `${user.programs} programs`}
+                                {user.role === 'triager' && `${user.triaged} triaged`}
+                              </p>
+                            </div>
+                            <div className="space-y-1">
+                              <span className="text-[10px] uppercase tracking-widest text-muted-foreground font-mono">Joined</span>
+                              <p className="font-mono text-sm text-foreground">{user.joined}</p>
+                            </div>
+                         </div>
                     </div>
-                  </td>
-                  <td className="px-6 py-4">
-                    <Badge variant="outline" className={`font-mono text-xs uppercase ${roleColors[user.role]}`}>
-                      {user.role}
-                    </Badge>
-                  </td>
-                  <td className="px-6 py-4">
-                    <Badge variant="secondary" className={`font-mono text-xs uppercase ${statusColors[user.status]}`}>
-                      {user.status}
-                    </Badge>
-                  </td>
-                  <td className="px-6 py-4 font-mono text-sm text-muted-foreground">
-                    {user.role === 'researcher' && `${user.reports} reports`}
-                    {user.role === 'company' && `${user.programs} programs`}
-                    {user.role === 'triager' && `${user.triaged} triaged`}
-                  </td>
-                  <td className="px-6 py-4 text-sm font-mono text-muted-foreground">{user.joined}</td>
-                  <td className="px-6 py-4">
-                    <DropdownMenu>
-                      <DropdownMenuTrigger asChild>
-                        <Button variant="ghost" size="icon" className="h-8 w-8 hover:bg-foreground/5">
-                          <MoreVertical className="h-4 w-4 text-muted-foreground" />
-                        </Button>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent align="end" className="bg-background border-border">
-                        <DropdownMenuItem className="focus:bg-muted font-mono text-xs">
-                          <Mail className="h-3 w-3 mr-2" />
-                          SEND_EMAIL
-                        </DropdownMenuItem>
-                        <DropdownMenuItem className="focus:bg-muted font-mono text-xs">
-                          <User className="h-3 w-3 mr-2" />
-                          VIEW_PROFILE
-                        </DropdownMenuItem>
-                        <DropdownMenuSeparator className="bg-border" />
-                        {user.status === 'active' && (
-                          <DropdownMenuItem className="text-muted-foreground focus:bg-muted focus:text-foreground font-mono text-xs">
-                            <AlertTriangle className="h-3 w-3 mr-2" />
-                            SUSPEND_USER
-                          </DropdownMenuItem>
-                        )}
-                        {user.status !== 'banned' && (
-                          <DropdownMenuItem className="text-foreground focus:bg-destructive/10 focus:text-destructive font-mono text-xs">
-                            <Ban className="h-3 w-3 mr-2" />
-                            BAN_USER
-                          </DropdownMenuItem>
-                        )}
-                        {(user.status === 'suspended' || user.status === 'banned') && (
-                          <DropdownMenuItem className="text-foreground focus:bg-muted font-mono text-xs">
-                            <CheckCircle className="h-3 w-3 mr-2" />
-                            RESTORE_USER
-                          </DropdownMenuItem>
-                        )}
-                      </DropdownMenuContent>
-                    </DropdownMenu>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+                ))}
+            </div>
+
+            {/* Desktop Table View */}
+            <div className="hidden md:block overflow-x-auto">
+              <table className="w-full text-left text-sm">
+                <thead className="bg-muted/50 font-mono text-xs uppercase text-muted-foreground">
+                  <tr className="border-b border-border/30">
+                    <th className="px-6 py-3 font-medium">User</th>
+                    <th className="px-6 py-3 font-medium">Role</th>
+                    <th className="px-6 py-3 font-medium">Status</th>
+                    <th className="px-6 py-3 font-medium">Activity</th>
+                    <th className="px-6 py-3 font-medium">Joined</th>
+                    <th className="px-6 py-3 font-medium">Actions</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-border/20">
+                  {filteredUsers.map((user) => (
+                    <tr key={user.id} className="hover:bg-muted/50 transition-colors">
+                      <td className="px-6 py-4">
+                        <div className="flex items-center gap-3">
+                          <div className="w-10 h-10 rounded-lg bg-foreground/5 border border-border flex items-center justify-center">
+                            {user.role === 'company' ? (
+                              <Shield className="h-5 w-5 text-muted-foreground" />
+                            ) : (
+                              <User className="h-5 w-5 text-muted-foreground" />
+                            )}
+                          </div>
+                          <div>
+                            <p className="font-medium text-foreground font-mono">{user.name}</p>
+                            <p className="text-sm text-muted-foreground font-mono text-xs">{user.email}</p>
+                          </div>
+                        </div>
+                      </td>
+                      <td className="px-6 py-4">
+                        <Badge variant="outline" className={`font-mono text-xs uppercase ${roleColors[user.role]}`}>
+                          {user.role}
+                        </Badge>
+                      </td>
+                      <td className="px-6 py-4">
+                        <Badge variant="secondary" className={`font-mono text-xs uppercase ${statusColors[user.status]}`}>
+                          {user.status}
+                        </Badge>
+                      </td>
+                      <td className="px-6 py-4 font-mono text-sm text-muted-foreground">
+                        {user.role === 'researcher' && `${user.reports} reports`}
+                        {user.role === 'company' && `${user.programs} programs`}
+                        {user.role === 'triager' && `${user.triaged} triaged`}
+                      </td>
+                      <td className="px-6 py-4 text-sm font-mono text-muted-foreground">{user.joined}</td>
+                      <td className="px-6 py-4">
+                        <DropdownMenu>
+                          <DropdownMenuTrigger asChild>
+                            <Button variant="ghost" size="icon" className="h-8 w-8 hover:bg-foreground/5">
+                              <MoreVertical className="h-4 w-4 text-muted-foreground" />
+                            </Button>
+                          </DropdownMenuTrigger>
+                          <DropdownMenuContent align="end" className="bg-background border-border">
+                            <DropdownMenuItem className="focus:bg-muted font-mono text-xs">
+                              <Mail className="h-3 w-3 mr-2" />
+                              SEND_EMAIL
+                            </DropdownMenuItem>
+                            <DropdownMenuItem className="focus:bg-muted font-mono text-xs">
+                              <User className="h-3 w-3 mr-2" />
+                              VIEW_PROFILE
+                            </DropdownMenuItem>
+                            <DropdownMenuSeparator className="bg-border" />
+                            {user.status === 'active' && (
+                              <DropdownMenuItem className="text-muted-foreground focus:bg-muted focus:text-foreground font-mono text-xs">
+                                <AlertTriangle className="h-3 w-3 mr-2" />
+                                SUSPEND_USER
+                              </DropdownMenuItem>
+                            )}
+                            {user.status !== 'banned' && (
+                              <DropdownMenuItem className="text-foreground focus:bg-destructive/10 focus:text-destructive font-mono text-xs">
+                                <Ban className="h-3 w-3 mr-2" />
+                                BAN_USER
+                              </DropdownMenuItem>
+                            )}
+                            {(user.status === 'suspended' || user.status === 'banned') && (
+                              <DropdownMenuItem className="text-foreground focus:bg-muted font-mono text-xs">
+                                <CheckCircle className="h-3 w-3 mr-2" />
+                                RESTORE_USER
+                              </DropdownMenuItem>
+                            )}
+                          </DropdownMenuContent>
+                        </DropdownMenu>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
         </div>
       </GlassCard>
     </div>

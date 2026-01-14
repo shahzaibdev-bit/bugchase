@@ -89,7 +89,7 @@ export const TriagerOnboardingModal = ({ isOpen, onClose, onSuccess }: TriagerOn
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-2xl bg-white dark:bg-zinc-950 border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-zinc-100 p-0 overflow-hidden gap-0 rounded-2xl">
+      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto bg-white dark:bg-zinc-950 border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-zinc-100 p-0 gap-0 rounded-2xl">
         <DialogHeader className="p-5 bg-zinc-50 dark:bg-zinc-900/50 border-b border-zinc-200 dark:border-zinc-900">
           <div className="flex items-center justify-between">
              <DialogTitle className="text-xl font-mono font-bold text-foreground flex items-center gap-2">

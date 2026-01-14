@@ -63,15 +63,15 @@ export default function AdminPrograms() {
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
         <InvertedTiltCard>
-          <InverseSpotlightCard className="bg-zinc-900/50 border border-zinc-800 rounded-xl p-6 flex flex-col items-center justify-center backdrop-blur-sm hover:border-zinc-500 transition-colors">
-            <span className="text-4xl font-bold text-white tracking-tight mb-2">{mockPrograms.length}</span>
+          <InverseSpotlightCard className="bg-white/50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 rounded-xl p-6 flex flex-col items-center justify-center backdrop-blur-sm hover:border-zinc-300 dark:hover:border-zinc-500 transition-colors">
+            <span className="text-4xl font-bold text-zinc-900 dark:text-white tracking-tight mb-2">{mockPrograms.length}</span>
             <span className="text-[10px] font-mono uppercase tracking-widest text-zinc-500">Total Programs</span>
           </InverseSpotlightCard>
         </InvertedTiltCard>
 
         <InvertedTiltCard>
-          <InverseSpotlightCard className="bg-zinc-900/50 border border-zinc-800 rounded-xl p-6 flex flex-col items-center justify-center backdrop-blur-sm hover:border-zinc-500 transition-colors">
-            <span className="text-4xl font-bold text-white tracking-tight mb-2">
+          <InverseSpotlightCard className="bg-white/50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 rounded-xl p-6 flex flex-col items-center justify-center backdrop-blur-sm hover:border-zinc-300 dark:hover:border-zinc-500 transition-colors">
+            <span className="text-4xl font-bold text-zinc-900 dark:text-white tracking-tight mb-2">
               {mockPrograms.filter(p => p.status === 'active').length}
             </span>
             <span className="text-[10px] font-mono uppercase tracking-widest text-zinc-500">Active</span>
@@ -79,8 +79,8 @@ export default function AdminPrograms() {
         </InvertedTiltCard>
 
         <InvertedTiltCard>
-          <InverseSpotlightCard className="bg-zinc-900/50 border border-zinc-800 rounded-xl p-6 flex flex-col items-center justify-center backdrop-blur-sm hover:border-zinc-500 transition-colors">
-             <span className="text-4xl font-bold text-white tracking-tight mb-2">
+          <InverseSpotlightCard className="bg-white/50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 rounded-xl p-6 flex flex-col items-center justify-center backdrop-blur-sm hover:border-zinc-300 dark:hover:border-zinc-500 transition-colors">
+             <span className="text-4xl font-bold text-zinc-900 dark:text-white tracking-tight mb-2">
               {mockPrograms.filter(p => p.status === 'pending').length}
             </span>
             <span className="text-[10px] font-mono uppercase tracking-widest text-zinc-500">Pending Review</span>
@@ -88,8 +88,8 @@ export default function AdminPrograms() {
         </InvertedTiltCard>
 
         <InvertedTiltCard>
-          <InverseSpotlightCard className="bg-zinc-900/50 border border-zinc-800 rounded-xl p-6 flex flex-col items-center justify-center backdrop-blur-sm hover:border-zinc-500 transition-colors">
-             <span className="text-4xl font-bold text-white tracking-tight mb-2">
+          <InverseSpotlightCard className="bg-white/50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 rounded-xl p-6 flex flex-col items-center justify-center backdrop-blur-sm hover:border-zinc-300 dark:hover:border-zinc-500 transition-colors">
+             <span className="text-4xl font-bold text-zinc-900 dark:text-white tracking-tight mb-2">
               {mockPrograms.filter(p => p.type === 'Private').length}
             </span>
             <span className="text-[10px] font-mono uppercase tracking-widest text-zinc-500">Private</span>
@@ -134,91 +134,170 @@ export default function AdminPrograms() {
 
       {/* Programs Table */}
       <GlassCard className="p-0 overflow-hidden border-border bg-card/50">
-        <div className="overflow-x-auto">
-          <table className="w-full text-left text-sm">
-            <thead className="bg-muted/50 font-mono text-xs uppercase text-muted-foreground">
-              <tr className="border-b border-border/30">
-                <th className="px-6 py-3 font-medium">Program</th>
-                <th className="px-6 py-3 font-medium">Company</th>
-                <th className="px-6 py-3 font-medium">Type</th>
-                <th className="px-6 py-3 font-medium">Bounty Range</th>
-                <th className="px-6 py-3 font-medium">Status</th>
-                <th className="px-6 py-3 font-medium">Submitted</th>
-                <th className="px-6 py-3 font-medium">Actions</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-border/20">
-              {filteredPrograms.map((program) => (
-                <tr key={program.id} className="hover:bg-muted/50 transition-colors">
-                  <td className="px-6 py-4">
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-lg bg-foreground/5 border border-border flex items-center justify-center">
-                        <Shield className="h-5 w-5 text-muted-foreground" />
-                      </div>
-                      <span className="font-medium text-foreground font-mono">{program.name}</span>
-                    </div>
-                  </td>
-                  <td className="px-6 py-4">
-                    <div className="flex items-center gap-2 text-muted-foreground">
-                        <Building2 className="h-4 w-4" />
-                        <span className="font-mono text-xs">{program.company}</span>
-                    </div>
-                  </td>
-                  <td className="px-6 py-4 font-mono text-xs">
-                    {program.type.toUpperCase()}
-                  </td>
-                  <td className="px-6 py-4 font-mono text-xs text-muted-foreground">
-                    {program.bountyRange}
-                  </td>
-                  <td className="px-6 py-4">
-                    <Badge variant="outline" className={`font-mono text-[10px] uppercase ${statusColors[program.status]}`}>
-                      {program.status}
-                    </Badge>
-                  </td>
-                  <td className="px-6 py-4 font-mono text-xs text-muted-foreground">
-                    {program.submitted}
-                  </td>
-                  <td className="px-6 py-4">
-                    <DropdownMenu>
-                      <DropdownMenuTrigger asChild>
-                        <Button variant="ghost" size="icon" className="h-8 w-8 hover:bg-foreground/5">
-                          <MoreVertical className="h-4 w-4 text-muted-foreground" />
-                        </Button>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent align="end" className="bg-background border-border">
-                        <DropdownMenuItem 
-                            className="focus:bg-muted font-mono text-xs"
-                            onClick={() => navigate(`/admin/programs/${program.id}`)}
-                        >
-                          <Eye className="h-3 w-3 mr-2" />
-                          VIEW_DETAILS
-                        </DropdownMenuItem>
-                        <DropdownMenuSeparator className="bg-border" />
-                        {program.status === 'pending' && (
-                            <>
-                                <DropdownMenuItem className="text-green-500 focus:bg-green-500/10 focus:text-green-500 font-mono text-xs">
-                                <CheckCircle className="h-3 w-3 mr-2" />
-                                APPROVE
+        <div className="w-full">
+            {/* Mobile Card View */}
+            <div className="md:hidden space-y-4 p-4 bg-zinc-50/50 dark:bg-zinc-900/20">
+                {filteredPrograms.map((program) => (
+                    <div key={program.id} className="bg-background border border-border p-4 rounded-xl shadow-sm flex flex-col gap-4">
+                        <div className="flex justify-between items-start">
+                            <div className="flex items-center gap-3">
+                                <div className="w-10 h-10 rounded-lg bg-foreground/5 border border-border flex items-center justify-center">
+                                    <Shield className="h-5 w-5 text-muted-foreground" />
+                                </div>
+                                <div>
+                                    <p className="font-bold text-foreground font-mono text-sm">{program.name}</p>
+                                    <div className="flex items-center gap-1 text-xs text-muted-foreground font-mono">
+                                        <Building2 className="h-3 w-3" />
+                                        <span>{program.company}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <DropdownMenu>
+                              <DropdownMenuTrigger asChild>
+                                <Button variant="ghost" size="icon" className="h-8 w-8 hover:bg-foreground/5 -mr-2">
+                                  <MoreVertical className="h-4 w-4 text-muted-foreground" />
+                                </Button>
+                              </DropdownMenuTrigger>
+                              <DropdownMenuContent align="end" className="bg-background border-border">
+                                <DropdownMenuItem 
+                                    className="focus:bg-muted font-mono text-xs"
+                                    onClick={() => navigate(`/admin/programs/${program.id}`)}
+                                >
+                                  <Eye className="h-3 w-3 mr-2" />
+                                  VIEW_DETAILS
                                 </DropdownMenuItem>
-                                <DropdownMenuItem className="text-red-500 focus:bg-red-500/10 focus:text-red-500 font-mono text-xs">
-                                <XCircle className="h-3 w-3 mr-2" />
-                                REJECT
-                                </DropdownMenuItem>
-                            </>
-                        )}
-                        {program.status === 'active' && (
-                           <DropdownMenuItem className="text-yellow-500 focus:bg-yellow-500/10 focus:text-yellow-500 font-mono text-xs">
-                              <AlertTriangle className="h-3 w-3 mr-2" />
-                              PAUSE_PROGRAM
-                           </DropdownMenuItem>
-                        )}
-                      </DropdownMenuContent>
-                    </DropdownMenu>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+                                <DropdownMenuSeparator className="bg-border" />
+                                {program.status === 'pending' && (
+                                    <>
+                                        <DropdownMenuItem className="text-green-500 focus:bg-green-500/10 focus:text-green-500 font-mono text-xs">
+                                        <CheckCircle className="h-3 w-3 mr-2" />
+                                        APPROVE
+                                        </DropdownMenuItem>
+                                        <DropdownMenuItem className="text-red-500 focus:bg-red-500/10 focus:text-red-500 font-mono text-xs">
+                                        <XCircle className="h-3 w-3 mr-2" />
+                                        REJECT
+                                        </DropdownMenuItem>
+                                    </>
+                                )}
+                                {program.status === 'active' && (
+                                   <DropdownMenuItem className="text-yellow-500 focus:bg-yellow-500/10 focus:text-yellow-500 font-mono text-xs">
+                                      <AlertTriangle className="h-3 w-3 mr-2" />
+                                      PAUSE_PROGRAM
+                                   </DropdownMenuItem>
+                                )}
+                              </DropdownMenuContent>
+                            </DropdownMenu>
+                        </div>
+
+                        <div className="grid grid-cols-2 gap-3 pt-3 border-t border-border/30">
+                             <div className="space-y-1">
+                                 <span className="text-[10px] uppercase tracking-widest text-muted-foreground font-mono">Status</span>
+                                 <div>
+                                    <Badge variant="outline" className={`font-mono text-[10px] uppercase ${statusColors[program.status]}`}>
+                                      {program.status}
+                                    </Badge>
+                                 </div>
+                             </div>
+                             <div className="space-y-1">
+                                 <span className="text-[10px] uppercase tracking-widest text-muted-foreground font-mono">Type</span>
+                                 <p className="font-mono text-xs">{program.type.toUpperCase()}</p>
+                             </div>
+                             <div className="col-span-2 space-y-1">
+                                 <span className="text-[10px] uppercase tracking-widest text-muted-foreground font-mono">Bounty Range</span>
+                                 <p className="font-mono text-xs text-muted-foreground">{program.bountyRange}</p>
+                             </div>
+                        </div>
+                    </div>
+                ))}
+            </div>
+
+            {/* Desktop Table View */}
+            <div className="hidden md:block overflow-x-auto">
+              <table className="w-full text-left text-sm">
+                <thead className="bg-muted/50 font-mono text-xs uppercase text-muted-foreground">
+                  <tr className="border-b border-border/30">
+                    <th className="px-6 py-3 font-medium">Program</th>
+                    <th className="px-6 py-3 font-medium">Company</th>
+                    <th className="px-6 py-3 font-medium">Type</th>
+                    <th className="px-6 py-3 font-medium">Bounty Range</th>
+                    <th className="px-6 py-3 font-medium">Status</th>
+                    <th className="px-6 py-3 font-medium">Submitted</th>
+                    <th className="px-6 py-3 font-medium">Actions</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-border/20">
+                  {filteredPrograms.map((program) => (
+                    <tr key={program.id} className="hover:bg-muted/50 transition-colors">
+                      <td className="px-6 py-4">
+                        <div className="flex items-center gap-3">
+                          <div className="w-10 h-10 rounded-lg bg-foreground/5 border border-border flex items-center justify-center">
+                            <Shield className="h-5 w-5 text-muted-foreground" />
+                          </div>
+                          <span className="font-medium text-foreground font-mono">{program.name}</span>
+                        </div>
+                      </td>
+                      <td className="px-6 py-4">
+                        <div className="flex items-center gap-2 text-muted-foreground">
+                            <Building2 className="h-4 w-4" />
+                            <span className="font-mono text-xs">{program.company}</span>
+                        </div>
+                      </td>
+                      <td className="px-6 py-4 font-mono text-xs">
+                        {program.type.toUpperCase()}
+                      </td>
+                      <td className="px-6 py-4 font-mono text-xs text-muted-foreground">
+                        {program.bountyRange}
+                      </td>
+                      <td className="px-6 py-4">
+                        <Badge variant="outline" className={`font-mono text-[10px] uppercase ${statusColors[program.status]}`}>
+                          {program.status}
+                        </Badge>
+                      </td>
+                      <td className="px-6 py-4 font-mono text-xs text-muted-foreground">
+                        {program.submitted}
+                      </td>
+                      <td className="px-6 py-4">
+                        <DropdownMenu>
+                          <DropdownMenuTrigger asChild>
+                            <Button variant="ghost" size="icon" className="h-8 w-8 hover:bg-foreground/5">
+                              <MoreVertical className="h-4 w-4 text-muted-foreground" />
+                            </Button>
+                          </DropdownMenuTrigger>
+                          <DropdownMenuContent align="end" className="bg-background border-border">
+                            <DropdownMenuItem 
+                                className="focus:bg-muted font-mono text-xs"
+                                onClick={() => navigate(`/admin/programs/${program.id}`)}
+                            >
+                              <Eye className="h-3 w-3 mr-2" />
+                              VIEW_DETAILS
+                            </DropdownMenuItem>
+                            <DropdownMenuSeparator className="bg-border" />
+                            {program.status === 'pending' && (
+                                <>
+                                    <DropdownMenuItem className="text-green-500 focus:bg-green-500/10 focus:text-green-500 font-mono text-xs">
+                                    <CheckCircle className="h-3 w-3 mr-2" />
+                                    APPROVE
+                                    </DropdownMenuItem>
+                                    <DropdownMenuItem className="text-red-500 focus:bg-red-500/10 focus:text-red-500 font-mono text-xs">
+                                    <XCircle className="h-3 w-3 mr-2" />
+                                    REJECT
+                                    </DropdownMenuItem>
+                                </>
+                            )}
+                            {program.status === 'active' && (
+                               <DropdownMenuItem className="text-yellow-500 focus:bg-yellow-500/10 focus:text-yellow-500 font-mono text-xs">
+                                  <AlertTriangle className="h-3 w-3 mr-2" />
+                                  PAUSE_PROGRAM
+                               </DropdownMenuItem>
+                            )}
+                          </DropdownMenuContent>
+                        </DropdownMenu>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
         </div>
       </GlassCard>
     </div>

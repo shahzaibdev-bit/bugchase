@@ -32,6 +32,9 @@ export const MagneticButton = ({
     const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
         if (!ref.current) return;
 
+        // PERFORMANCE OPTIMIZATION: Disable on mobile/touch devices
+        if (typeof window !== 'undefined' && window.innerWidth < 768) return;
+
         const rect = ref.current.getBoundingClientRect();
         
         // Calculate center of button

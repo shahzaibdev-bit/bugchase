@@ -245,9 +245,9 @@ export default function CompanyAssets() {
                                            exit={{ opacity: 0, height: 0 }}
                                            className="p-3 hover:bg-zinc-900/30 transition-colors"
                                        >
-                                           <div className="flex items-center justify-between mb-1">
-                                               <span className="text-xs font-mono font-bold text-zinc-300 truncate max-w-[120px]">{job.target}</span>
-                                               <div className="flex items-center gap-1.5">
+                                           <div className="flex items-start justify-between mb-1">
+                                               <span className="text-xs font-mono font-bold text-zinc-300 break-all mr-2">{job.target}</span>
+                                               <div className="flex items-center gap-1.5 shrink-0 mt-0.5">
                                                    {job.status === 'QUEUED' && <Clock className="w-3 h-3 text-zinc-500" />}
                                                    {job.status === 'PROCESSING' && <RefreshCw className="w-3 h-3 text-blue-500 animate-spin" />}
                                                    {job.status === 'COMPLETED' && <CheckCircle2 className="w-3 h-3 text-emerald-500" />}

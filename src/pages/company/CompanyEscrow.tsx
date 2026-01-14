@@ -138,8 +138,8 @@ export default function CompanyEscrow() {
                     ADD FUNDS
                 </Button>
             </DialogTrigger>
-            <DialogContent className="max-w-4xl bg-background border-border text-foreground p-0 overflow-hidden shadow-2xl">
-                 <div className="flex flex-col h-full">
+            <DialogContent className="max-w-4xl bg-background border-border text-foreground p-0 overflow-hidden shadow-2xl max-h-[90vh] flex flex-col">
+                 <div className="flex flex-col h-full overflow-y-auto">
                     {/* Header */}
                     <div className="p-6 border-b border-border bg-background/50 backdrop-blur-md">
                         <DialogTitle className="text-lg font-bold font-mono tracking-tight text-foreground flex items-center gap-2">

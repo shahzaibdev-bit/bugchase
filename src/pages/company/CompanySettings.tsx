@@ -27,24 +27,24 @@ export default function CompanySettings() {
       </div>
 
       <Tabs defaultValue="profile" className="space-y-6">
-        <TabsList className="glass-panel p-1">
-          <TabsTrigger value="profile" className="gap-2">
+        <TabsList className="glass-panel p-1 w-full justify-start overflow-x-auto no-scrollbar">
+          <TabsTrigger value="profile" className="gap-2 shrink-0">
             <Building2 className="h-4 w-4" />
             Profile
           </TabsTrigger>
-          <TabsTrigger value="notifications" className="gap-2">
+          <TabsTrigger value="notifications" className="gap-2 shrink-0">
             <Bell className="h-4 w-4" />
             Notifications
           </TabsTrigger>
-          <TabsTrigger value="security" className="gap-2">
+          <TabsTrigger value="security" className="gap-2 shrink-0">
             <Shield className="h-4 w-4" />
             Security
           </TabsTrigger>
-          <TabsTrigger value="team" className="gap-2">
+          <TabsTrigger value="team" className="gap-2 shrink-0">
             <Users className="h-4 w-4" />
             Team
           </TabsTrigger>
-          <TabsTrigger value="domains" className="gap-2">
+          <TabsTrigger value="domains" className="gap-2 shrink-0">
             <GlobeLock className="h-4 w-4" />
             Domain Verification
           </TabsTrigger>

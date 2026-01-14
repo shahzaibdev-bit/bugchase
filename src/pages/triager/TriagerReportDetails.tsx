@@ -393,6 +393,7 @@ export default function TriagerReportDetails() {
     const [cvssModalOpen, setCvssModalOpen] = useState(false);
     const [reasonModalOpen, setReasonModalOpen] = useState(false);
     const [summaryModalOpen, setSummaryModalOpen] = useState(false);
+    const [mobileTab, setMobileTab] = useState<'details' | 'activity' | 'tools'>('details');
 
     // Pending Logic States
     const [pendingStatus, setPendingStatus] = useState<ReportStatus | null>(null);
@@ -496,14 +497,21 @@ export default function TriagerReportDetails() {
                  </div>
              </div>
 
+             {/* Mobile Tab Bar */}
+             <div className="lg:hidden flex border-b border-zinc-200 dark:border-zinc-800 bg-white dark:bg-black shrink-0">
+                 <button onClick={() => setMobileTab('details')} className={`flex-1 py-3 text-xs font-bold uppercase tracking-widest transition-colors ${mobileTab === 'details' ? 'border-b-2 border-black dark:border-white text-black dark:text-white' : 'text-zinc-500'}`}>Details</button>
+                 <button onClick={() => setMobileTab('activity')} className={`flex-1 py-3 text-xs font-bold uppercase tracking-widest transition-colors ${mobileTab === 'activity' ? 'border-b-2 border-black dark:border-white text-black dark:text-white' : 'text-zinc-500'}`}>Activity</button>
+                 <button onClick={() => setMobileTab('tools')} className={`flex-1 py-3 text-xs font-bold uppercase tracking-widest transition-colors ${mobileTab === 'tools' ? 'border-b-2 border-black dark:border-white text-black dark:text-white' : 'text-zinc-500'}`}>Tools</button>
+             </div>
+
              <div className="flex-1 overflow-hidden">
                 <div className="h-full grid grid-cols-1 lg:grid-cols-12 gap-0">
                     
                     {/* LEFT COLUMN: Content & Timeline (70%) */}
-                    <ScrollArea className="lg:col-span-8 h-full border-r border-zinc-200 dark:border-zinc-800">
+                    <ScrollArea className={`lg:col-span-8 h-full border-r border-zinc-200 dark:border-zinc-800 ${mobileTab === 'tools' ? 'hidden lg:block' : ''}`}>
                         <div className="p-8 max-w-4xl mx-auto space-y-12 pb-32">
                              {/* Report Content */}
-                             <div className="space-y-6">
+                             <div className={`space-y-6 ${mobileTab === 'activity' ? 'hidden lg:block' : ''}`}>
                                  <h1 className="text-3xl font-bold text-black dark:text-white leading-tight">{MINAPR_46.title}</h1>
                                  
                                  <div className="flex gap-3">
@@ -522,10 +530,12 @@ export default function TriagerReportDetails() {
                                  </div>
                              </div>
 
-                             <Separator className="bg-zinc-200 dark:bg-zinc-800" />
+                             <div className={`${mobileTab === 'activity' ? 'hidden lg:block' : ''}`}>
+                                <Separator className="bg-zinc-200 dark:bg-zinc-800" />
+                             </div>
 
                              {/* Timeline & Activity */}
-                             <div>
+                             <div className={`${mobileTab === 'details' ? 'hidden lg:block' : ''}`}>
                                  <h3 className="text-lg font-bold text-black dark:text-white mb-6">Activity</h3>
                                  <div className="pl-2">
                                      {state.timeline.map((event) => (
@@ -574,7 +584,7 @@ export default function TriagerReportDetails() {
                     </ScrollArea>
 
                     {/* RIGHT COLUMN: Sidebar (30%) */}
-                    <div className="lg:col-span-4 h-full overflow-y-auto bg-zinc-50/50 dark:bg-zinc-900/20 p-6 space-y-6">
+                    <div className={`lg:col-span-4 h-full overflow-y-auto bg-zinc-50/50 dark:bg-zinc-900/20 p-6 space-y-6 ${mobileTab !== 'tools' ? 'hidden lg:block' : ''}`}>
                         
                         {/* Status Card */}
                         <div className="space-y-4">

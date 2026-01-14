@@ -143,10 +143,10 @@ export default function ResearcherReports() {
       </div>
 
       {/* 2. Filter Bar */}
-      <div className="w-full flex items-center justify-between p-2 mb-6 border rounded-lg backdrop-blur-md transition-colors border-zinc-300 bg-white/80 dark:border-zinc-800 dark:bg-zinc-900/40">
+      <div className="w-full flex flex-col md:flex-row items-stretch md:items-center justify-between p-2 mb-6 border rounded-lg backdrop-blur-md transition-colors border-zinc-300 bg-white/80 dark:border-zinc-800 dark:bg-zinc-900/40 gap-4 md:gap-0">
         
         {/* Left: Filter Chips */}
-        <div className="flex items-center gap-2 overflow-x-auto no-scrollbar">
+        <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1 md:pb-0 w-full md:w-auto">
           
            {/* Date Filter */}
            <Popover>
@@ -255,20 +255,63 @@ export default function ResearcherReports() {
         </div>
 
         {/* Right: Search */}
-        <div className="relative flex items-center px-2 ml-4 shrink-0">
+        <div className="relative flex items-center px-0 md:px-2 md:ml-4 shrink-0 w-full md:w-auto">
           <input 
             type="text" 
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search by ID or name..." 
-            className="bg-transparent border-none outline-none text-sm w-48 sm:w-64 text-right pr-8 placeholder:text-zinc-500 text-black dark:text-zinc-100 dark:placeholder:text-zinc-400 focus:ring-0"
+            className="bg-transparent border-none outline-none text-sm w-full md:w-48 sm:w-64 text-left md:text-right pr-8 placeholder:text-zinc-500 text-black dark:text-zinc-100 dark:placeholder:text-zinc-400 focus:ring-0"
           />
           <Search className="w-4 h-4 text-zinc-600 dark:text-zinc-400 absolute right-2 pointer-events-none" />
         </div>
       </div>
 
-      {/* 3. Data Table */}
-      <div className="w-full overflow-hidden border rounded-lg backdrop-blur-sm border-zinc-200 bg-white/40 dark:border-zinc-800/50 dark:bg-zinc-900/20">
+      {/* 3. Data View - Mobile Cards (Visible only on mobile) */}
+      <div className="space-y-4 md:hidden">
+        {filteredReports.map((report) => (
+          <div 
+            key={report.id}
+            onClick={() => navigate(`/researcher/reports/${report.id}`)}
+            className="p-4 rounded-lg border bg-white/40 border-zinc-200 dark:bg-zinc-900/20 dark:border-zinc-800/50 backdrop-blur-sm active:scale-[0.98] transition-transform"
+          >
+            <div className="flex items-center justify-between mb-3">
+              <span className="font-mono text-xs text-zinc-500 dark:text-zinc-400">{report.id}</span>
+              <span className="text-[10px] uppercase px-1.5 py-0.5 rounded border bg-transparent text-zinc-600 border-zinc-300 dark:text-zinc-400 dark:border-zinc-700">
+                {report.status}
+              </span>
+            </div>
+            
+            <h3 className="font-bold text-lg text-zinc-900 dark:text-white mb-1 leading-tight">{report.title}</h3>
+            
+            <div className="flex items-center gap-2 mb-4">
+              <div className="w-4 h-4 rounded-full flex items-center justify-center text-[8px] font-bold uppercase bg-zinc-200 text-zinc-700 dark:bg-zinc-800 dark:text-white">
+                 {report.target.charAt(0)}
+              </div>
+              <span className="text-xs font-medium text-zinc-600 dark:text-zinc-400">{report.target}</span>
+            </div>
+
+            <div className="flex items-center justify-between pt-3 border-t border-zinc-200/50 dark:border-zinc-800/50">
+              <div className="flex items-center gap-3">
+                <span className="text-xs text-zinc-500">{report.date}</span>
+                <div className="h-1 w-1 rounded-full bg-zinc-300 dark:bg-zinc-700" />
+                <SeverityBadge severity={report.severity} />
+              </div>
+              <span className="font-mono text-sm font-medium text-zinc-900 dark:text-white">
+                {report.bounty > 0 ? `$${report.bounty}` : '0$'}
+              </span>
+            </div>
+          </div>
+        ))}
+         {filteredReports.length === 0 && (
+             <div className="text-center py-10 text-zinc-500 font-mono text-sm">
+                 No reports found for "{activeTab}"
+             </div>
+         )}
+      </div>
+
+      {/* 3. Data View - Desktop Table (Hidden on mobile) */}
+      <div className="hidden md:block w-full overflow-hidden border rounded-lg backdrop-blur-sm border-zinc-200 bg-white/40 dark:border-zinc-800/50 dark:bg-zinc-900/20">
         <table className="w-full text-left border-collapse">
           <thead>
             <tr className="border-b border-zinc-200 dark:border-zinc-800">
