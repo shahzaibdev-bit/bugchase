@@ -64,8 +64,8 @@ export default function CompanySettings() {
             </div>
             
             {/* Logo Upload Section */}
-            <div className="flex items-center gap-6 p-4 rounded-xl border border-dashed border-border bg-muted/30">
-                <div className="relative group cursor-pointer">
+            <div className="flex flex-col md:flex-row items-center md:items-start gap-4 md:gap-6 p-4 rounded-xl border border-dashed border-border bg-muted/30">
+                <div className="relative group cursor-pointer shrink-0">
                     <div className="w-24 h-24 rounded-xl bg-muted border border-border flex items-center justify-center overflow-hidden relative">
                          {/* Mock Logo Placeholder or Image */}
                          <Building2 className="h-10 w-10 text-muted-foreground" />
@@ -76,12 +76,12 @@ export default function CompanySettings() {
                          </div>
                     </div>
                 </div>
-                <div className="space-y-2 flex-1">
+                <div className="space-y-2 flex-1 text-center md:text-left">
                     <div className="flex flex-col">
                         <Label className="text-base font-medium">Company Logo</Label>
                         <span className="text-xs text-muted-foreground mt-1">Recommended size: 512x512px (PNG, JPG)</span>
                     </div>
-                    <div className="flex gap-2">
+                    <div className="flex items-center justify-center md:justify-start gap-2">
                         <Button variant="secondary" size="sm" className="gap-2">
                             <Upload className="h-3 w-3" />
                             Upload New

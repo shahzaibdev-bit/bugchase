@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion, useScroll, useTransform } from 'motion/react';
+import { Link } from 'react-router-dom';
 import { Shield, Globe, Lock, Terminal, Award, Eye, ChevronRight, Cpu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -103,7 +104,7 @@ export default function LandingPage() {
               <div className="group relative inline-block cursor-default transition-transform duration-500 hover:scale-105">
                 
                 {/* Layer 1: Base Color-Flipping Text */}
-                <h1 className="font-display text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[0.9] mb-6 relative z-10 text-zinc-900 dark:text-transparent whitespace-nowrap">
+                <h1 className="font-display text-[10vw] md:text-7xl lg:text-8xl font-black tracking-tighter leading-[0.9] mb-6 relative z-10 text-zinc-900 dark:text-transparent whitespace-nowrap">
                   {/* BUG: Solid Black (Light) -> White/Gray Gradient (Dark) */}
                   <span className="inline-block bg-none dark:bg-[linear-gradient(90deg,#ffffff_50%,#a3a3a3_50%)] bg-[length:200%_100%] bg-left group-hover:bg-right transition-[background-position] duration-500 ease-linear bg-clip-text text-zinc-900 dark:text-transparent mr-2 md:mr-4">
                     BUG
@@ -117,10 +118,10 @@ export default function LandingPage() {
                 {/* Layer 2: ShinyText Overlay (The Glow Effect) */}
                 {/* color="transparent" ensures we only see the traveling shine */}
                 <div 
-                  className="absolute inset-0 z-20 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  className="hidden md:block absolute inset-0 z-20 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                   aria-hidden="true"
                 >
-                   <h1 className="font-display text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[0.9] mb-6 whitespace-nowrap">
+                   <h1 className="font-display text-[10vw] md:text-7xl lg:text-8xl font-black tracking-tighter leading-[0.9] mb-6 whitespace-nowrap">
                     <ShinyText 
                       text="BUG" 
                       disabled={false} 
@@ -153,20 +154,24 @@ export default function LandingPage() {
                 Mobilizing elite cyber-intelligence for sovereign defense. We architect the shield against asymmetric digital threats.
               </p>
               
-              <div className="flex flex-row flex-nowrap items-center justify-center lg:justify-start gap-3 md:gap-4 w-full md:w-auto">
-                {/* GET STARTED - ORIGINAL STYLING (Side-by-Side) - INCREASED SIZE */}
-                <MagneticButton strength={0.2} triggerRadius={100} className="block">
-                  <Button className="h-12 md:h-14 px-6 md:px-8 text-xs md:text-lg bg-zinc-900 text-white hover:bg-zinc-800 dark:bg-white dark:text-black dark:hover:bg-white/90 rounded-xl border border-transparent shadow-[0_0_20px_rgba(0,0,0,0.1)] dark:shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-xl dark:hover:shadow-[0_0_40px_rgba(255,255,255,0.3)] transition-all duration-300 group font-bold whitespace-nowrap">
-                    GET STARTED <ChevronRight className="ml-1 md:ml-2 h-3 w-3 md:h-5 md:w-5 group-hover:translate-x-1 transition-transform" />
-                  </Button>
-                </MagneticButton>
+              <div className="flex flex-row flex-nowrap items-center justify-center lg:justify-start gap-2 md:gap-4 w-full md:w-auto max-w-[95vw] mx-auto lg:mx-0">
+                {/* GET STARTED */}
+                <Link to="/signup">
+                  <MagneticButton strength={0.2} triggerRadius={100} className="block">
+                    <Button className="h-12 md:h-14 px-4 md:px-8 text-xs md:text-lg bg-zinc-900 text-white hover:bg-zinc-800 dark:bg-white dark:text-black dark:hover:bg-white/90 rounded-xl border border-transparent shadow-[0_0_20px_rgba(0,0,0,0.1)] dark:shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-xl dark:hover:shadow-[0_0_40px_rgba(255,255,255,0.3)] transition-all duration-300 group font-bold whitespace-nowrap">
+                      GET STARTED <ChevronRight className="ml-1 md:ml-2 h-3 w-3 md:h-5 md:w-5 group-hover:translate-x-1 transition-transform" />
+                    </Button>
+                  </MagneticButton>
+                </Link>
                 
-                {/* RESEARCHER ACCESS - ORIGINAL STYLING (Side-by-Side) - INCREASED SIZE */}
-                <MagneticButton strength={0.2} triggerRadius={100} className="block">
-                  <Button variant="outline" className="h-12 md:h-14 px-6 md:px-8 text-xs md:text-lg rounded-xl border border-black/15 dark:border-white/20 hover:bg-zinc-900 dark:hover:bg-white dark:hover:border-white text-zinc-600 dark:text-muted-foreground hover:text-white dark:hover:text-black transition-all duration-300 font-mono uppercase whitespace-nowrap">
-                    &gt;_ RESEARCHER ACCESS
-                  </Button>
-                </MagneticButton>
+                {/* RESEARCHER ACCESS */}
+                <Link to="/login" className="flex-shrink-1 min-w-0">
+                  <MagneticButton strength={0.2} triggerRadius={100} className="block">
+                    <Button variant="outline" className="h-12 md:h-14 px-3 md:px-8 text-[10px] sm:text-xs md:text-lg rounded-xl border border-black/15 dark:border-white/20 hover:bg-zinc-900 dark:hover:bg-white dark:hover:border-white text-zinc-600 dark:text-muted-foreground hover:text-white dark:hover:text-black transition-all duration-300 font-mono uppercase truncate max-w-full">
+                      <span className="opacity-50 mr-1 md:mr-2 font-mono">{">_"}</span> RESEARCHER ACCESS
+                    </Button>
+                  </MagneticButton>
+                </Link>
               </div>
             </motion.div>
           </div>
@@ -244,8 +249,7 @@ export default function LandingPage() {
                 />
               </div>
 
-               {/* Capital Deployed - NO DEFAULT HIGHLIGHT */}
-               <div className="w-full">
+              <div className="w-full">
                 <StatItem 
                   value={<CountUp 
                     to={85000000} 
@@ -257,7 +261,7 @@ export default function LandingPage() {
                   label="Capital Deployed (PKR)"
                   suffix="+"
                 />
-               </div>
+              </div>
 
               <div className="w-full">
                 <StatItem 

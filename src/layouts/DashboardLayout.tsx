@@ -66,13 +66,13 @@ export const DashboardLayout = ({ navItems, userRole }: DashboardLayoutProps) =>
             {/* 2. Top Navigation Bar (Floating & Shrinking) */}
             <header 
                 className={cn(
-                    "fixed top-6 left-0 right-0 mx-auto z-50 rounded-xl border transition-all duration-500 ease-in-out backdrop-blur-md shadow-xl shadow-black/5 dark:shadow-black/40 animate-slide-down-fade",
+                    "fixed top-4 md:top-6 left-0 right-0 mx-auto z-50 rounded-xl border transition-all duration-500 ease-in-out backdrop-blur-md shadow-xl shadow-black/5 dark:shadow-black/40 animate-slide-down-fade",
                     isScrolled 
-                        ? "w-[85%] max-w-5xl bg-white/70 dark:bg-black/70 border-zinc-200/50 dark:border-white/5 py-3" 
+                        ? "w-[95%] md:w-[85%] max-w-5xl bg-white/70 dark:bg-black/70 border-zinc-200/50 dark:border-white/5 py-2 md:py-3" 
                         : "w-[95%] max-w-7xl bg-white/70 dark:bg-black/70 border-zinc-200 dark:border-white/10 py-3"
                 )}
             >
-                <div className="flex items-center justify-between px-6 h-full">
+                <div className="flex items-center justify-between px-4 md:px-6 h-full">
                     
                     {/* 1. Logo: CyberLogo Scaled */}
                     <div className="flex items-center gap-3">
@@ -153,9 +153,9 @@ export const DashboardLayout = ({ navItems, userRole }: DashboardLayoutProps) =>
 
                         <div className="h-8 w-[1px] bg-zinc-200 dark:bg-white/10 hidden sm:block" />
 
-                        {/* User Profile Dropdown (Custom) */}
+                        {/* User Profile Dropdown (Custom) - Desktop Only */}
                         <div 
-                            className="relative z-50"
+                            className="relative z-50 hidden lg:block"
                             onMouseEnter={() => setIsProfileOpen(true)}
                             onMouseLeave={() => setIsProfileOpen(false)}
                         >
@@ -183,7 +183,7 @@ export const DashboardLayout = ({ navItems, userRole }: DashboardLayoutProps) =>
 
                                         {/* Menu Items */}
                                         <div className="p-1">
-                                            {userRole !== 'company' && (
+                                            {userRole !== 'company' && userRole !== 'admin' && (
                                                 <Link 
                                                     to={`/${userRole}/profile`}
                                                     className="flex items-center gap-2 w-full px-4 py-2 text-sm text-zinc-600 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-lg transition-colors"
@@ -222,55 +222,97 @@ export const DashboardLayout = ({ navItems, userRole }: DashboardLayoutProps) =>
 
                 {/* Mobile Navigation Menu */}
                 {mobileMenuOpen && (
-                    <div className="lg:hidden w-full border-t border-zinc-200 dark:border-white/10 bg-white/95 dark:bg-zinc-950/95 backdrop-blur-xl animate-fade-in-up rounded-b-2xl">
-                        <nav className="flex flex-col p-4 space-y-2">
-                             {navItems.map((item) => {
-                                if (item.items) {
-                                    return (
-                                        <div key={item.label} className="space-y-1">
-                                            <div className="px-4 py-2 text-xs font-bold font-mono text-zinc-400 uppercase tracking-widest">
-                                                {item.icon && <item.icon className="w-3 h-3 inline mr-2" />}
-                                                {item.label}
-                                            </div>
-                                            {item.items.map(subItem => {
-                                                 const isActive = location.pathname === subItem.path;
-                                                 return (
-                                                    <Link
-                                                        key={subItem.path}
-                                                        to={subItem.path}
-                                                        onClick={() => setMobileMenuOpen(false)}
-                                                        className={cn(
-                                                            "block ml-4 px-4 py-2 rounded-lg text-sm font-medium transition-colors",
-                                                            isActive
-                                                                ? "bg-zinc-100 dark:bg-white/10 text-black dark:text-white"
-                                                                : "text-zinc-500 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-white/5"
-                                                        )}
-                                                    >
-                                                        {subItem.label}
-                                                    </Link>
-                                                 );
-                                            })}
-                                        </div>
-                                    )
-                                }
+                    <div className="lg:hidden w-full border-t border-zinc-200 dark:border-white/10 bg-white/95 dark:bg-zinc-950/95 backdrop-blur-xl animate-fade-in-up rounded-b-2xl max-h-[85vh] overflow-y-auto">
+                        <nav className="flex flex-col p-4 space-y-4">
+                             {/* 1. Mobile Profile Header */}
+                             <div className="flex items-center gap-3 px-4 py-3 bg-zinc-50 dark:bg-white/5 rounded-xl border border-zinc-100 dark:border-white/5">
+                                <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-zinc-200 to-zinc-400 overflow-hidden shrink-0">
+                                    <img 
+                                        src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=100&q=80" 
+                                        alt="Avatar" 
+                                        className="w-full h-full object-cover" 
+                                    />
+                                </div>
+                                <div className="flex-1 min-w-0">
+                                    <p className="text-sm font-bold text-zinc-900 dark:text-white truncate">{user?.name || 'NeoAnderson'}</p>
+                                    <p className="text-xs text-zinc-500 dark:text-zinc-400 font-mono uppercase tracking-wide">{userRole || 'RESEARCHER'}</p>
+                                </div>
+                             </div>
 
-                                const isActive = location.pathname === item.path;
-                                return (
-                                    <Link
-                                        key={item.path}
-                                        to={item.path || '#'}
+                             {/* 2. Navigation Links */}
+                             <div className="space-y-1">
+                                {navItems.map((item) => {
+                                    if (item.items) {
+                                        return (
+                                            <div key={item.label} className="space-y-1">
+                                                <div className="px-4 py-2 text-xs font-bold font-mono text-zinc-400 uppercase tracking-widest mt-2">
+                                                    {item.icon && <item.icon className="w-3 h-3 inline mr-2" />}
+                                                    {item.label}
+                                                </div>
+                                                {item.items.map(subItem => {
+                                                    const isActive = location.pathname === subItem.path;
+                                                    return (
+                                                        <Link
+                                                            key={subItem.path}
+                                                            to={subItem.path}
+                                                            onClick={() => setMobileMenuOpen(false)}
+                                                            className={cn(
+                                                                "block ml-4 px-4 py-3 rounded-lg text-sm font-medium transition-colors border border-transparent",
+                                                                isActive
+                                                                    ? "bg-zinc-100 dark:bg-white/10 text-black dark:text-white border-zinc-200 dark:border-white/10"
+                                                                    : "text-zinc-500 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-white/5"
+                                                            )}
+                                                        >
+                                                            {subItem.label}
+                                                        </Link>
+                                                    );
+                                                })}
+                                            </div>
+                                        )
+                                    }
+
+                                    const isActive = location.pathname === item.path;
+                                    return (
+                                        <Link
+                                            key={item.path}
+                                            to={item.path || '#'}
+                                            onClick={() => setMobileMenuOpen(false)}
+                                            className={cn(
+                                                "flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors border border-transparent",
+                                                isActive
+                                                    ? "bg-zinc-100 dark:bg-white/10 text-black dark:text-white border-zinc-200 dark:border-white/10"
+                                                    : "text-zinc-500 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-white/5"
+                                            )}
+                                        >
+                                            {item.icon && <item.icon className="w-4 h-4" />}
+                                            {item.label}
+                                        </Link>
+                                    );
+                                })}
+                            </div>
+
+                            {/* 3. Footer Actions (Settings/Logout) */}
+                            <div className="pt-4 mt-2 border-t border-zinc-200 dark:border-white/10 space-y-2">
+                                {userRole !== 'company' && userRole !== 'admin' && (
+                                    <Link 
+                                        to={`/${userRole}/profile`}
                                         onClick={() => setMobileMenuOpen(false)}
-                                        className={cn(
-                                            "px-4 py-3 rounded-lg text-sm font-medium transition-colors",
-                                            isActive
-                                                ? "bg-zinc-100 dark:bg-white/10 text-black dark:text-white"
-                                                : "text-zinc-500 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-white/5"
-                                        )}
+                                        className="flex items-center gap-3 w-full px-4 py-3 text-sm text-zinc-600 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-white/5 rounded-lg transition-colors font-medium border border-transparent hover:border-zinc-200 dark:hover:border-white/10"
                                     >
-                                        {item.label}
+                                        <User className="w-4 h-4" />
+                                        Profile Settings
                                     </Link>
-                                );
-                            })}
+                                )}
+                                <button 
+                                    className="flex items-center gap-3 w-full px-4 py-3 text-sm text-red-500 hover:bg-red-50 dark:hover:bg-red-950/20 rounded-lg transition-colors font-medium border border-transparent hover:border-red-200 dark:hover:border-red-900/30"
+                                    onClick={() => {
+                                        handleLogout();
+                                    }}
+                                >
+                                    <LogOut className="w-4 h-4" />
+                                    Logout
+                                </button>
+                            </div>
                         </nav>
                     </div>
                 )}

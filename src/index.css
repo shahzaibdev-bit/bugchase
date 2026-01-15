@@ -151,99 +151,164 @@
   html {
     scroll-behavior: smooth;
   }
+
+  /* GLOBAL PERFORMANCE OVERRIDE FOR MOBILE */
+  @media (max-width: 768px) {
+    /* Nuclear option for glassmorphism: Disable blur AND force solid background */
+    [class*="backdrop-blur"],
+    [class*="glass"] {
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+      background-color: hsl(var(--background)) !important;
+      opacity: 1 !important;
+    }
+    
+    /* Ensure Navbar specifically is solid */
+    nav, header {
+      backdrop-filter: none !important;
+    }
+
+    /* GLOBAL: Hide Scrollbars on Mobile (Keep functionality, hide visual bar) */
+    * {
+      -ms-overflow-style: none !important; /* IE and Edge */
+      scrollbar-width: none !important; /* Firefox */
+    }
+    *::-webkit-scrollbar {
+      display: none !important; /* Chrome, Safari and Opera */
+      width: 0 !important;
+      height: 0 !important;
+    }
+  }
 }
 
 @layer components {
   /* 3D Glass Card System */
   .glass-card {
-    /* Mobile: Solid (High Performance) */
-    @apply relative bg-card border border-border/40 rounded-xl;
-    /* Desktop: Blur (High Quality) */
-    @apply md:bg-card/60 md:backdrop-blur-xl;
-    
-    box-shadow: var(--shadow-cyber);
-    transform: translateZ(0);
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    @apply relative rounded-xl border border-border/10 bg-card;
+  }
+  
+  @media (min-width: 768px) {
+    .glass-card {
+      @apply bg-card/60 backdrop-blur-xl border-border/40;
+      box-shadow: var(--shadow-cyber);
+      transform: translateZ(0);
+      transition: transform 0.4s ease, box-shadow 0.4s ease, background-color 0.4s ease, border-color 0.4s ease;
+    }
   }
 
   .glass-card:hover {
-    transform: translateY(-4px) translateZ(20px);
-    box-shadow: var(--shadow-lifted);
+  }
+  
+  @media (min-width: 768px) {
+    .glass-card:hover {
+      transform: translateY(-4px) translateZ(20px);
+      box-shadow: var(--shadow-lifted);
+    }
   }
 
   .glass-panel {
-    /* Mobile: Solid */
-    @apply bg-card border border-border/20 rounded-2xl;
-    /* Desktop: Blur */
-    @apply md:bg-card/40 md:backdrop-blur-2xl;
-    
-    box-shadow: var(--shadow-3d);
+    @apply rounded-2xl border border-border/10 bg-card;
+  }
+  
+  @media (min-width: 768px) {
+    .glass-panel {
+      @apply bg-card/40 backdrop-blur-2xl border-border/20;
+      box-shadow: var(--shadow-3d);
+    }
   }
 
   .glass-button {
-    /* Mobile: Solid */
-    @apply bg-card/90 border border-border/30 hover:bg-card/95 transition-colors duration-300;
-    /* Desktop: Blur */
-    @apply md:bg-card/30 md:backdrop-blur-lg md:hover:bg-card/50;
-    
-    box-shadow: var(--glow-primary);
+    @apply bg-card border border-border/10 transition-colors duration-200;
+  }
+
+  @media (min-width: 768px) {
+    .glass-button {
+      @apply bg-card/30 backdrop-blur-lg border-border/30 hover:bg-card/50 duration-300;
+      box-shadow: var(--glow-primary);
+    }
   }
 
   /* Cyber 3D Card */
   .cyber-card {
-    @apply relative overflow-hidden rounded-xl;
-    background: linear-gradient(145deg, hsl(var(--card)) 0%, hsl(var(--card) / 0.8) 100%);
-    box-shadow: var(--shadow-cyber);
-    border: 1px solid hsl(var(--border) / 0.5);
-    transform-style: preserve-3d;
-    perspective: 1000px;
-    transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    @apply relative overflow-hidden rounded-xl bg-card border border-border/20;
+  }
+  
+  @media (min-width: 768px) {
+    .cyber-card {
+      background: linear-gradient(145deg, hsl(var(--card)) 0%, hsl(var(--card) / 0.8) 100%);
+      box-shadow: var(--shadow-cyber);
+      border: 1px solid hsl(var(--border) / 0.5);
+      transform-style: preserve-3d;
+      perspective: 1000px;
+      transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    }
   }
 
   .cyber-card::before {
     content: '';
-    @apply absolute inset-0 rounded-xl;
-    background: linear-gradient(135deg, hsl(var(--foreground) / 0.03) 0%, transparent 50%, hsl(var(--foreground) / 0.02) 100%);
-    pointer-events: none;
+    @apply absolute inset-0 rounded-xl pointer-events-none;
+  }
+  
+  @media (min-width: 768px) {
+    .cyber-card::before {
+      background: linear-gradient(135deg, hsl(var(--foreground) / 0.03) 0%, transparent 50%, hsl(var(--foreground) / 0.02) 100%);
+    }
   }
 
+  /* Mouse tracking glow - Desktop Only */
   .cyber-card::after {
-    content: '';
-    @apply absolute inset-0 rounded-xl opacity-0 transition-opacity duration-500;
-    background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), hsl(var(--foreground) / 0.08) 0%, transparent 50%);
-    pointer-events: none;
   }
 
-  .cyber-card:hover::after {
-    @apply opacity-100;
-  }
-
-  .cyber-card:hover {
-    transform: translateY(-8px) rotateX(2deg) rotateY(-2deg);
-    box-shadow: var(--shadow-lifted);
+  @media (min-width: 768px) {
+    .cyber-card::after {
+      content: '';
+      @apply absolute inset-0 rounded-xl opacity-0 transition-opacity duration-500;
+      background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), hsl(var(--foreground) / 0.08) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    
+    .cyber-card:hover::after {
+      @apply opacity-100;
+    }
+    
+    .cyber-card:hover {
+      transform: translateY(-8px) rotateX(2deg) rotateY(-2deg);
+      box-shadow: var(--shadow-lifted);
+    }
   }
 
   /* Terminal Effect */
   .terminal-box {
-    @apply relative bg-card/90 backdrop-blur-xl rounded-lg border border-border/50 overflow-hidden;
-    box-shadow: var(--shadow-cyber);
+    @apply relative rounded-lg border border-border/20 overflow-hidden bg-card;
+  }
+  
+  @media (min-width: 768px) {
+    .terminal-box {
+      @apply bg-card/90 backdrop-blur-xl border-border/50;
+      box-shadow: var(--shadow-cyber);
+    }
   }
 
   .terminal-box::before {
     content: '';
-    @apply absolute inset-0;
-    background: repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent 2px,
-      hsl(var(--foreground) / 0.02) 2px,
-      hsl(var(--foreground) / 0.02) 4px
-    );
-    pointer-events: none;
+    @apply absolute inset-0 pointer-events-none;
+  }
+  
+  /* Simplest background for mobile, detailed for desktop */
+  @media (min-width: 768px) {
+    .terminal-box::before {
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        hsl(var(--foreground) / 0.02) 2px,
+        hsl(var(--foreground) / 0.02) 4px
+      );
+    }
   }
 
   .terminal-header {
-    @apply flex items-center gap-2 px-4 py-3 border-b border-border/50 bg-card/50;
+    @apply flex items-center gap-2 px-4 py-3 border-b border-border/20 bg-card/50;
   }
 
   .terminal-dot {
@@ -261,20 +326,37 @@
 
   .gradient-text-glow {
     @apply bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent;
-    text-shadow: 0 0 40px hsl(var(--foreground) / 0.3);
+  }
+  
+  @media (min-width: 768px) {
+    .gradient-text-glow {
+      text-shadow: 0 0 40px hsl(var(--foreground) / 0.3);
+    }
   }
 
-  /* Glowing Effects */
+  /* Glowing Effects - Disable on mobile */
   .glow-effect {
-    box-shadow: var(--glow-primary);
+  }
+  @media (min-width: 768px) {
+    .glow-effect {
+      box-shadow: var(--glow-primary);
+    }
   }
 
   .glow-accent {
-    box-shadow: var(--glow-accent);
+  }
+  @media (min-width: 768px) {
+    .glow-accent {
+      box-shadow: var(--glow-accent);
+    }
   }
 
   .glow-cyber {
-    box-shadow: var(--glow-cyber);
+  }
+  @media (min-width: 768px) {
+    .glow-cyber {
+      box-shadow: var(--glow-cyber);
+    }
   }
 
   /* Hero Backgrounds */
@@ -341,8 +423,14 @@
 
   /* Top Navigation */
   .top-nav {
-    @apply fixed top-0 left-0 right-0 z-50 h-16 bg-background/80 backdrop-blur-xl border-b border-border/30;
-    box-shadow: 0 4px 30px hsl(var(--foreground) / 0.03);
+    @apply fixed top-0 left-0 right-0 z-50 h-16 bg-background border-b border-border/10;
+  }
+  
+  @media (min-width: 768px) {
+    .top-nav {
+      @apply bg-background/80 backdrop-blur-xl border-border/30;
+      box-shadow: 0 4px 30px hsl(var(--foreground) / 0.03);
+    }
   }
 
   .nav-link {
@@ -366,8 +454,14 @@
   /* 3D Button */
   .btn-3d {
     @apply relative overflow-hidden;
-    transform-style: preserve-3d;
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  /* 3D only on desktop */
+  @media (min-width: 768px) {
+    .btn-3d {
+      transform-style: preserve-3d;
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
   }
 
   .btn-3d::before {
@@ -376,8 +470,13 @@
   }
 
   .btn-3d:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 30px hsl(var(--foreground) / 0.15);
+  }
+
+  @media (min-width: 768px) {
+    .btn-3d:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px hsl(var(--foreground) / 0.15);
+    }
   }
 
   .btn-3d:hover::before {
@@ -388,15 +487,19 @@
     transform: translateY(0);
   }
 
-  /* Floating Elements */
+  /* Floating Elements - Disable on mobile */
   .float-3d {
-    animation: float-3d 8s ease-in-out infinite;
-    transform-style: preserve-3d;
+  }
+  @media (min-width: 768px) {
+    .float-3d {
+      animation: float-3d 8s ease-in-out infinite;
+      transform-style: preserve-3d;
+    }
   }
 
-  /* Scanline Effect */
+  /* Scanline Effect - Disable on mobile */
   .scanline {
-    @apply absolute inset-0 pointer-events-none overflow-hidden;
+    @apply absolute inset-0 pointer-events-none overflow-hidden hidden md:block;
   }
 
   .scanline::before {
@@ -416,7 +519,15 @@
     @apply absolute inset-0 pointer-events-none opacity-[0.02];
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
   }
+
+  /* Disable Noise on Mobile for Performance */
+  @media (max-width: 768px) {
+    .noise {
+      display: none;
+    }
+  }
 }
+
 
 @layer utilities {
   .animate-float {

@@ -23,6 +23,9 @@ export const InverseSpotlightCTA = () => {
 
     const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
         if (!cardRef.current) return;
+        
+        // PERFORMANCE OPTIMIZATION: Disable on mobile/touch devices
+        if (typeof window !== 'undefined' && window.innerWidth < 768) return;
 
         const rect = cardRef.current.getBoundingClientRect();
         const mouseX = e.clientX - rect.left;
